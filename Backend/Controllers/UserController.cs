@@ -26,23 +26,23 @@ namespace Backend.Controllers
                 var validateExistenceU = await _userService.ValidateUsernameExistence(user);
                 if (validateExistenceU)
                 {
-                    return BadRequest(new { message = "The username " + user.Username + "  is already in use" });
+                    return BadRequest(new { message = "The username " + user.Username + " is already in use" });
                 }
 
                 var validateExistenceE = await _userService.ValidateEmailExistence(user);
                 if (validateExistenceE)
                 {
-                    return BadRequest(new { message = "The email " + user.Email + "  is already in use" });
+                    return BadRequest(new { message = "The email " + user.Email + " is already in use" });
                 }
 
                 var validateExistenceI = await _userService.ValidateIdentityDocumentExistence(user);
                 if (validateExistenceI)
                 {
-                    return BadRequest(new { message = "The identity document " + user.IdentityDocument+ "  has already been registered" });
+                    return BadRequest(new { message = "The identity document " + user.IdentityDocument+ " has already been registered" });
                 }
                 user.Password = Encrypt.EncryptPassword(user.Password);
                 await _userService.SaveUser(user);
-                return Ok(new { message = "Usuario registrado con exito." });
+                return Ok(new { message = "User successfully registered." });
             }
             catch (Exception ex)
             {
