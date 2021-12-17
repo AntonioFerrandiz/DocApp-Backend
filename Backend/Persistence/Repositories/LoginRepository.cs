@@ -17,6 +17,13 @@ namespace Backend.Persistence.Repositories
             _context = context;
         }
 
+        public async Task<User> GetUserdata(int userID)
+        {
+            var userData = await _context.Users
+                .Where(x => x.Id == userID).FirstOrDefaultAsync();
+            return userData;
+        }
+
         public async Task<User> ValidateUser(User user)
         {
             var userL = await _context.Users

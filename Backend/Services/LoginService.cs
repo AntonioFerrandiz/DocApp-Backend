@@ -16,6 +16,11 @@ namespace Backend.Services
             _loginRepository = loginrepository;
         }
 
+        public async Task<User> GetUserdata(int userID)
+        {
+            return await _loginRepository.GetUserdata(userID);
+        }
+
         public async Task<User> ValidateUser(User user)
         {
             return await _loginRepository.ValidateUser(user);

@@ -9,5 +9,6 @@ namespace Backend.Domain.IRepositories
     public interface ILoginRepository
     {
         Task<User> ValidateUser(User user);
+        Task<User> GetUserdata(int userID);
     }
 }
