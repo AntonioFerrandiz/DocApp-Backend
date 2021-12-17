@@ -35,14 +35,18 @@ namespace Backend
         {
             services.AddDbContext<AplicationDbContext>(options =>
             options.UseSqlServer("Server=(local)\\sqlexpress;Database=DocApp;Trusted_Connection=True;"));
+            services.AddHttpClient();
+
 
             // Services
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<ILoginService, LoginService>();
+            services.AddScoped<IPatientService, PatientService>();
 
             // Repositories
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<ILoginRepository, LoginRepository>();
+            services.AddScoped<IPatientRepository, PatientRepository>();
 
 
             // Cors
@@ -52,11 +56,13 @@ namespace Backend
                                                 AllowAnyMethod()));
 
             // Add Authentication
+            services.AddControllers();
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-                    .AddJwtBearer(options =>
-                    options.TokenValidationParameters = new TokenValidationParameters
-                    {
-                        ValidateIssuer = true,
+            .AddJwtBearer(options =>
+            {
+                options.TokenValidationParameters = new TokenValidationParameters()
+                {
+                    ValidateIssuer = true,
                         ValidateAudience = true,
                         ValidateLifetime = true,
                         ValidateIssuerSigningKey = true,
@@ -64,13 +70,10 @@ namespace Backend
                         ValidAudience = Configuration["Jwt:Audience"],
                         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Jwt:SecretKey"])),
                         ClockSkew = TimeSpan.Zero
-                    });
-
-
-            services.AddControllers().AddNewtonsoftJson(options =>
-                                                        options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
+                };
+            });
         }
-
+            
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
@@ -78,6 +81,7 @@ namespace Backend
             {
                 app.UseDeveloperExceptionPage();
             }
+            app.UseHttpsRedirection();
 
             app.UseCors("AllowWebapp");
 
