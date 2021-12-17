@@ -1,12 +1,15 @@
 ﻿using Backend.Domain.IServices;
 using Backend.Domain.Models;
 using Backend.Utils;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace Backend.Controllers
@@ -39,6 +42,24 @@ namespace Backend.Controllers
             }
             catch (Exception ex)
             {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [Route("GetUserData")]
+        [HttpGet]
+        public async Task<IActionResult> GetUserData()
+        {
+            try
+            {
+                //var identity = HttpContext.User.Identity as ClaimsIdentity;
+                //int userID = JwtConfigurator.GetTokenUserID(identity);
+                var userData = await _loginService.GetUserdata(1);
+                return Ok(userData);
+            }
+            catch (Exception ex)
+            {
+
                 return BadRequest(ex.Message);
             }
         }
