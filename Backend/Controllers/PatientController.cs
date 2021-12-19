@@ -89,6 +89,36 @@ namespace Backend.Controllers
             }
         }
 
+        [HttpGet("GetNumberOfPatients")]
+        public async Task<IActionResult> GetNumberOfPatients()
+        {
+            try
+            {
+                var userId = 1;
+                var total = await _patientService.GetNumberOfPatients(userId);
+                return Ok(total);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+        
+        [HttpGet("GetListOfGenders")]
+        public async Task<IActionResult> GetListOfGenders()
+        {
+            try
+            {
+                var userID = 1;
+                var listOfGenders = await _patientService.GetListOfGender(userID);
+                return Ok(listOfGenders);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
         [Route("SearchPatientByFirstname/{firstname}")]
         [HttpGet]
         public async Task<IActionResult> SearchPatientByFirstname(string firstname)
