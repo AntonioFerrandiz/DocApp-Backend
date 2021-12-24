@@ -40,11 +40,24 @@ namespace Backend.Persistence.Repositories
                                     Gender = o.Gender
                                 })
                 .ToListAsync();
+            var femaleCount = 0;
+            var maleCount = 0;
             var genders = new List<string>();
             foreach (var patient in listPatients)
             {
-                genders.Add(patient.Gender);
+                //genders.Add(patient.Gender);
+                if(patient.Gender == "Female")
+                {
+                    femaleCount++;
+                }
+                else
+                {
+                    maleCount++;
+                }
             }
+            genders.Add(femaleCount.ToString());
+            genders.Add(maleCount.ToString());
+
             return genders;
         }
 
@@ -69,7 +82,6 @@ namespace Backend.Persistence.Repositories
         {
             var patient = await _context.Patients
                 .Where(x => x.Id == patientID && x.Active == 1)
-                .Include(x => x.medicalHistories)
                 .FirstOrDefaultAsync();
             return patient;
         }
