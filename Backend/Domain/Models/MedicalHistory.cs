@@ -11,16 +11,18 @@ namespace Backend.Domain.Models
     {
         public int Id { get; set; }
 
-        [Required]
-        [Column(TypeName = "varchar(50)")]
         public string Details { get; set; }
 
         public DateTime DateCreated { get; set; }
 
         public int Age { get; set; }
-
+        public string TimePeriod { get; set; }
         public int Weight { get; set; }
 
         public int Height { get; set; }
+        public string PrescribedMedication { get; set; }
+        
+        public int PatientID { get; set; }
+        public Patient Patient { get; set; }
     }
 }
