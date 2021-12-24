@@ -30,6 +30,5 @@ namespace Backend.Domain.Models
         public User User { get; set; }
 
 
-        public List<MedicalHistory> medicalHistories { get; set; }
     }
 }
