@@ -4,14 +4,16 @@ using Backend.Persistence.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Backend.Migrations
 {
     [DbContext(typeof(AplicationDbContext))]
-    partial class AplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211223235003_models-v10")]
+    partial class modelsv10
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -38,7 +40,7 @@ namespace Backend.Migrations
                     b.Property<int>("Height")
                         .HasColumnType("int");
 
-                    b.Property<int>("PatientID")
+                    b.Property<int>("PatientId")
                         .HasColumnType("int");
 
                     b.Property<string>("PrescribedMedication")
@@ -52,7 +54,7 @@ namespace Backend.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("PatientID");
+                    b.HasIndex("PatientId");
 
                     b.ToTable("medicalHistories");
                 });
@@ -130,8 +132,8 @@ namespace Backend.Migrations
             modelBuilder.Entity("Backend.Domain.Models.MedicalHistory", b =>
                 {
                     b.HasOne("Backend.Domain.Models.Patient", "Patient")
-                        .WithMany()
-                        .HasForeignKey("PatientID")
+                        .WithMany("medicalHistories")
+                        .HasForeignKey("PatientId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
