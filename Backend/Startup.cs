@@ -40,11 +40,13 @@ namespace Backend
 
             // Services
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IUserProfilePictureService, UserProfilePictureService>();
             services.AddScoped<ILoginService, LoginService>();
             services.AddScoped<IPatientService, PatientService>();
             services.AddScoped<IMedicalHistoryService, MedicalHistoryService>();
             // Repositories
             services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IUserProfilePictureRepository, UserProfilePictureRepository>();
             services.AddScoped<ILoginRepository, LoginRepository>();
             services.AddScoped<IPatientRepository, PatientRepository>();
             services.AddScoped<IMedicalHistoryRepository, MedicalHistoryRepository>();
