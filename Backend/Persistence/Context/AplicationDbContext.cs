@@ -13,6 +13,7 @@ namespace Backend.Persistence.Context
         public DbSet<Patient> Patients { get; set; }
         public DbSet<MedicalHistory> medicalHistories { get; set; }
 
+        public DbSet<UserProfilePicture> UserProfilePictures { get; set; }
         public AplicationDbContext(DbContextOptions<AplicationDbContext> options): base(options)
         {
 
