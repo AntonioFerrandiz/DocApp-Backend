@@ -5,6 +5,21 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\20211229215133_models-v15.cs" />
+    <Compile Remove="Migrations\20211229215133_models-v15.Designer.cs" />
+    <Compile Remove="Migrations\20211229215240_models-v16.cs" />
+    <Compile Remove="Migrations\20211229215240_models-v16.Designer.cs" />
+    <Compile Remove="Migrations\20211229215554_models-v17.cs" />
+    <Compile Remove="Migrations\20211229215554_models-v17.Designer.cs" />
+    <Compile Remove="Migrations\20211230005722_models-v16.cs" />
+    <Compile Remove="Migrations\20211230005722_models-v16.Designer.cs" />
+    <Compile Remove="Migrations\20211230005757_models-v17.cs" />
+    <Compile Remove="Migrations\20211230005757_models-v17.Designer.cs" />
+    <Compile Remove="Migrations\20211230010425_models-v16.cs" />
+    <Compile Remove="Migrations\20211230010425_models-v16.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="DTO\" />
   </ItemGroup>
 
