@@ -104,13 +104,28 @@ namespace Backend.Controllers
             }
         }
         
-        [HttpGet("GetListOfGenders")]
-        public async Task<IActionResult> GetListOfGenders()
+        [HttpGet("GetNumberOfMalePatients")]
+        public async Task<IActionResult> GetNumberOfMalePatients()
         {
             try
             {
                 var userID = 1;
-                var listOfGenders = await _patientService.GetListOfGender(userID);
+                int listOfGenders = await _patientService.GetNumberOfMalePatients(userID);
+                return Ok(listOfGenders);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpGet("GetNumberOfFemalePatients")]
+        public async Task<IActionResult> GetNumberOfFemalePatients()
+        {
+            try
+            {
+                var userID = 1;
+                int listOfGenders = await _patientService.GetNumberOfFemalePatients(userID);
                 return Ok(listOfGenders);
             }
             catch (Exception ex)

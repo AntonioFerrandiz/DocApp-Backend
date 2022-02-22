@@ -26,16 +26,19 @@ namespace Backend.Services
             await _patientRepository.DeletePatient(patient);
         }
 
-        public async Task<List<string>> GetListOfGender(int userID)
-        {
-           return await _patientRepository.GetListOfGender(userID);
-        }
-
         public async Task<List<Patient>> GetListPatientByUser(int userID)
         {
             return await _patientRepository.GetListPatientByUser(userID);
         }
 
+        public async Task<int> GetNumberOfMalePatients(int userID)
+        {
+            return await _patientRepository.GetNumberOfMalePatients(userID);
+        }
+        public async Task<int> GetNumberOfFemalePatients(int userID)
+        {
+            return await _patientRepository.GetNumberOfFemalePatients(userID);
+        }
         public async Task<int> GetNumberOfPatients(int userID)
         {
             return await _patientRepository.GetNumberOfPatients(userID);

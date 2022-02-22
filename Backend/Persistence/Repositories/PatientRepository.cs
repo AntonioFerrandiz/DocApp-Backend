@@ -30,7 +30,8 @@ namespace Backend.Persistence.Repositories
             await _context.SaveChangesAsync();
         }
 
-        public async Task<List<string>> GetListOfGender(int userID)
+
+        public async Task<int> GetNumberOfMalePatients(int userID)
         {
             var listPatients = await _context.Patients
                 .Where(x => x.Active == 1 && x.UserID == userID)
@@ -40,27 +41,36 @@ namespace Backend.Persistence.Repositories
                                     Gender = o.Gender
                                 })
                 .ToListAsync();
-            var femaleCount = 0;
-            var maleCount = 0;
-            var genders = new List<string>();
+            var count = 0;
             foreach (var patient in listPatients)
             {
-                //genders.Add(patient.Gender);
-                if(patient.Gender == "Female")
+                if(patient.Gender == "Male")
                 {
-                    femaleCount++;
-                }
-                else
-                {
-                    maleCount++;
+                    count++;
                 }
             }
-            genders.Add(femaleCount.ToString());
-            genders.Add(maleCount.ToString());
-
-            return genders;
+            return count;
         }
-
+        public async Task<int> GetNumberOfFemalePatients(int userID)
+        {
+            var listPatients = await _context.Patients
+                .Where(x => x.Active == 1 && x.UserID == userID)
+                                .Select(o => new Patient
+                                {
+                                    Id = o.Id,
+                                    Gender = o.Gender
+                                })
+                .ToListAsync();
+            var count = 0;
+            foreach (var patient in listPatients)
+            {
+                if (patient.Gender == "Female")
+                {
+                    count++;
+                }
+            }
+            return count;
+        }
         public async Task<List<Patient>> GetListPatientByUser(int userID)
         {
             var listPatients = await _context.Patients
